@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ins.mapper.user.UserMapper">
+
+    <select id="login" resultType="com.ins.common.dto.Message">
+        EXEC SP_MB_LOGIN #{user_code},#{user_pwd}
+    </select>
+
+    <select id="userGet" resultType="com.ins.user.dto.User">
+        EXEC SP_SYS_USER_GET #{page},#{rows},'',#{keyword},''
+    </select>
+
+    <select id="menuGet" resultType="com.ins.user.dto.MENU_CD">
+        EXEC SP_SYS_AUTH_MENU_TREE_TPM_MOBILE_GET #{user_code}
+    </select>
+
+</mapper>

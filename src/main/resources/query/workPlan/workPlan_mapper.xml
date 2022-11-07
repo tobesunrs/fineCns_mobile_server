@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ins.mapper.workPlan.WorkPlanMapper">
+
+    <resultMap id="ins1" type="com.ins.workPlan.dto.INS_PLAN_STATUS"></resultMap>
+    <resultMap id="ins2" type="com.ins.workPlan.dto.INS_PLAN_STATUS_SUB"></resultMap>
+
+    <resultMap id="list1" type="com.ins.workPlan.dto.INS_PLAN_NAME"></resultMap>
+    <resultMap id="list2" type="com.ins.workPlan.dto.INS_PLAN_STATUS"></resultMap>
+    <resultMap id="list3" type="com.ins.workPlan.dto.INS_PLAN_STATUS_SUB"></resultMap>
+    <resultMap id="list4" type="com.ins.workPlan.dto.INS_PLAN_TEAM_GET"></resultMap>
+
+    <resultMap id="r3_list1" type="com.ins.workPlan.dto.QMS_R3_GRP_LIST_GET"></resultMap>
+    <resultMap id="r3_list2" type="com.ins.workPlan.dto.QMS_OUT_LIST_GET"></resultMap>
+
+    <select id="workPlanGet" resultMap="list1, list2, list3">
+        EXEC SP_INS_PLAN_GET #{keyword}, #{keyword2}
+    </select>
+
+    <select id="workPlanGet2" resultMap="list1, list2, list3, list4">
+        EXEC SP_INS_PLAN_GET2 #{keyword}, #{keyword2}
+    </select>
+
+    <select id="workPlanCompGet" resultMap="list1, list2, list3, list4">
+        EXEC SP_INS_PLAN_COMP_GET #{page},#{rows},#{keyword}, #{keyword2}, #{keyword3}
+    </select>
+
+    <select id="workTeamAdd" resultType="com.ins.common.dto.Message">
+        EXEC SP_INS_TEAM_ADD #{keyword},#{keyword2}, #{user_code}
+    </select>
+
+    <select id="insPlanStatusGet" resultMap="ins1, ins2">
+        EXEC SP_INS_PLAN_STATUS_GET #{keyword}
+    </select>
+
+    <select id="attendanceAdd" resultType="com.ins.common.dto.Message">
+        EXEC SP_INS_ATTENDANCE_ADD #{work_date},#{user_code}, #{work_time}, #{early_time}, #{over_time}, #{week_time}, #{keyword}
+    </select>
+
+    <select id="scmOrdGet" resultType="com.ins.workPlan.dto.SCM_ORD">
+        EXEC MB_SCM_IN_ORD_GET #{page},#{rows}
+    </select>
+
+    <select id="scmSub" resultType="com.ins.workPlan.dto.SCM_ORD_SUB">
+        EXEC MB_SCM_IN_ORD_GET2 #{ord_no}
+    </select>
+
+    <select id="scmOrdGet2" resultType="com.ins.workPlan.dto.SCM_ORD">
+        EXEC MB_SCM_IN_ORD_GET3 #{page},#{rows}
+    </select>
+
+    <select id="scmSub2" resultType="com.ins.workPlan.dto.SCM_ORD_SUB">
+        EXEC MB_SCM_IN_ORD_GET4 #{ord_no}
+    </select>
+
+    <select id="scmOrdSubGet" resultType="com.ins.workPlan.dto.SCM_ORD_SUB">
+        EXEC MB_SCM_IN_ORD_SUB_GET #{keyword}
+    </select>
+
+    <select id="scmOrdSubGet2" resultType="com.ins.workPlan.dto.SCM_ORD_SUB">
+        EXEC MB_SCM_IN_ORD_SUB_GET2 #{keyword}
+    </select>
+
+    <select id="scmQcItemGet" resultType="com.ins.workPlan.dto.SCM_QC_ITEM">
+        EXEC SP_SYS_QC_ITEM_GET #{seq}, #{page}, #{keyword}, #{keyword2}, #{keyword3}
+    </select>
+
+    <select id="insPlanAdd" resultType="com.ins.common.dto.Message">
+        EXEC SP_INS_PLAN_MOBILE_ADD #{ins_no}, #{list1}, #{list2}, #{sign_path}, #{file_list},#{user_code},#{ins_remark}
+    </select>
+
+    <select id="commonGet" resultType="com.ins.workPlan.dto.COMMON_LIST">
+        EXEC SP_SYS_COMMON_GET #{seq}, #{page}, #{keyword}, #{keyword2}, #{keyword3}
+    </select>
+
+    <select id="placeDayGet" resultType="com.ins.workPlan.dto.PLACE_DAY_GET">
+        EXEC MB_PLACE_DAY_GET #{keyword}, #{keyword2}
+    </select>
+
+    <select id="expenseAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_EXPENSE_ADD #{keyword},#{keyword2}, #{amount}, #{keyword3}, #{user_code}, #{work_date} ,#{keyword4}
+    </select>
+
+    <select id="expenseGet" resultType="com.ins.workPlan.dto.INS_EXPENSE_GET">
+        EXEC MB_EXPENSE_GET #{keyword}, #{keyword2}
+    </select>
+
+    <select id="beforeImgGet" resultType="com.ins.workPlan.dto.INS_BEFORE_IMG">
+        EXEC SP_INS_BEFORE_IMG_GET #{keyword}
+    </select>
+
+    <select id="claimImgGet" resultType="com.ins.workPlan.dto.INS_BEFORE_IMG">
+        EXEC MB_CLAIM_IMG_GET #{keyword}
+    </select>
+
+    <select id="expenseDel" resultType="com.ins.common.dto.Message">
+        EXEC MB_EXPENSE_DEL #{keyword},#{seq}, #{user_code}
+    </select>
+
+    <select id="scmInAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_SCM_IN_ADD #{keyword},#{keyword2}, #{user_code}
+    </select>
+
+    <select id="partListGet" resultType="com.ins.workPlan.dto.SYS_PART_GET">
+        EXEC SP_SYS_PART_GET2 #{keyword}, #{keyword2},#{keyword3}, #{keyword4}
+    </select>
+
+    <select id="menuListGet" resultType="com.ins.workPlan.dto.USER_MENU_GET">
+        EXEC SP_SYS_AUTH_MENU_TREE_TPM_MOBILE_GET #{keyword}
+    </select>
+
+    <select id="scmOutAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_SCM_OUT_ADD #{keyword}, #{user_code}
+    </select>
+
+    <select id="scmRetInAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_SCM_REIN_ADD #{keyword}, #{user_code}
+    </select>
+
+    <select id="outsListGet" resultType="com.ins.workPlan.dto.OUTS_LIST_GET">
+        EXEC MB_OUTS_ORD_GET #{keyword}, #{keyword2}, #{keyword3}
+    </select>
+
+    <select id="outsListGet2" resultType="com.ins.workPlan.dto.OUTS_LIST_GET2">
+        EXEC OUTS_LIST_GET2 #{keyword}, #{ord_no}
+    </select>
+
+    <select id="outsListGet3" resultType="com.ins.workPlan.dto.OUTS_LIST_GET3">
+        EXEC OUTS_LIST_GET3 #{plan_no}
+    </select>
+
+    <select id="outsAdd" resultType="com.ins.common.dto.Message">
+        EXEC SP_LINE_POP_OUTS_IO_ADD #{keyword}, #{keyword2}, #{keyword3}, #{user_code}
+    </select>
+
+    <select id="claimListGet" resultType="com.ins.workPlan.dto.CLAIM_LIST_GET">
+        EXEC SP_CRM_CLAIM_GET #{seq}, #{page}, #{keyword}, #{keyword2}, #{keyword3}, #{keyword4}, #{user_code}
+    </select>
+
+    <select id="claimAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_CLAIM_ADD #{keyword}, #{keyword2}, #{user_code}
+    </select>
+
+    <select id="teamListGet" resultType="com.ins.workPlan.dto.INS_TEA_GET">
+        EXEC SP_INS_TEAM_GET #{keyword}
+    </select>
+
+    <select id="teamChangeAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_TEAM_CHANGE_ADD #{keyword}, #{keyword2}, #{user_code}
+    </select>
+
+    <select id="claimTeadAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_CLAIM_TEAM_ADD #{keyword}, #{keyword2}, #{user_code}
+    </select>
+
+    <select id="empListGet" resultType="com.ins.workPlan.dto.INS_PLAN_TPM_GET">
+        EXEC MB_INS_PLAN_TPM_GET #{keyword}
+    </select>
+
+    <select id="wmsOutCrmGet" resultType="com.ins.workPlan.dto.WMS_OUT_CRM_GET">
+        EXEC MB_CRM_WMS_OUT_ORD_GET
+    </select>
+
+    <select id="wmsOutImgGet" resultType="com.ins.workPlan.dto.WMS_OUT_IMG">
+        EXEC MB_WMS_OUT #{keyword}, #{keyword2}, #{keyword3}, #{keyword4}, #{user_code}
+    </select>
+
+    <select id="wmsOutAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_WMS_OUT #{keyword}, #{keyword2}, #{keyword3}, #{keyword4}, #{user_code}
+    </select>
+
+    <select id="insImgGet" resultType="com.ins.workPlan.dto.INS_IMAGE_GET">
+        EXEC SP_LINE_PLAN_GET2 #{keyword}, #{keyword2}
+    </select>
+
+    <select id="qmsR4Get" resultType="com.ins.workPlan.dto.QMS_R4_GET">
+        EXEC MB_QMS_R4_DATE_GET #{keyword}
+    </select>
+
+    <select id="qmsR4Add" resultType="com.ins.common.dto.Message">
+        EXEC MB_QMS_R4_DATE_ADD #{keyword},#{keyword2}, #{keyword3}, #{keyword4}
+    </select>
+
+    <select id="qmsOutOrdGet" resultType="com.ins.workPlan.dto.MB_QMS_OUT_ORD_GET">
+        EXEC MB_QMS_OUT_ORD_GET
+    </select>
+
+    <select id="QmsOutImgGet" resultType="com.ins.workPlan.dto.QMS_OUT_IMG_GET">
+        EXEC MB_QMS_OUT #{keyword},#{keyword2}, #{keyword3}
+    </select>
+
+    <select id="QmsOutListGet" resultMap="r3_list1, r3_list2">
+        EXEC MB_QMS_OUT #{keyword},#{keyword2}, #{keyword3}
+    </select>
+
+    <select id="qmsR3Add" resultType="com.ins.common.dto.Message">
+        EXEC MB_QMS_OUT_ADD #{keyword},#{keyword2}, #{keyword3}
+    </select>
+
+    <select id="qmsRoutGet" resultType="com.ins.workPlan.dto.QMS_ROUTE_GET">
+        EXEC SP_QMS_ROUTE_GET #{keyword},#{keyword2}
+    </select>
+
+    <select id="qmsR2Get" resultType="com.ins.workPlan.dto.QMS_R2_LIST_GET">
+        EXEC MB_QMS_R2_GET #{keyword},#{keyword2}
+    </select>
+
+    <select id="qmsR2Add" resultType="com.ins.common.dto.Message">
+        EXEC MB_QMS_R2_ADD #{keyword},#{keyword2}, #{keyword3}, #{keyword4}, #{keyword5}, #{keyword6}, #{user_code}
+    </select>
+
+    <select id="planQtyGet" resultType="com.ins.workPlan.dto.PLAN_QTY_GET">
+        EXEC MB_QMS_QTY_GET #{keyword}
+    </select>
+
+    <select id="scmQmsOrdGet" resultType="com.ins.workPlan.dto.SCM_QMS_ORD_GET">
+        EXEC SP_SCM_IN_ORD_READY4 #{keyword}, #{keyword2}, #{keyword3}
+    </select>
+
+    <select id="scmQmsR1Get" resultType="com.ins.workPlan.dto.SCM_QMS_R1_GET">
+        EXEC SP_QMS_R1_GET #{seq}, #{page}, #{keyword}, #{keyword2}, #{keyword3}
+    </select>
+
+    <select id="qmsR1ImgGet" resultType="com.ins.workPlan.dto.QMS_R1_IMG_GET">
+        EXEC MB_R1_IMG_GET  #{keyword}, #{keyword2}, #{keyword3}, #{keyword4}
+    </select>
+
+    <select id="R1ImgAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_R1_IMG_ADD #{part_code}, #{spec}, #{file_path}
+    </select>
+
+    <select id="qmsR1Add" resultType="com.ins.common.dto.Message">
+        EXEC SP_SCM_QMS_ADD #{keyword}, #{keyword2}, #{keyword3}, #{keyword4}, #{keyword5}, #{user_code}
+    </select>
+
+    <select id="qmsR1CheckGet" resultType="com.ins.workPlan.dto.QMS_R1_CHECK_GET">
+        EXEC MB_QMS_R1_CHECK_GET  #{seq}, #{page}
+    </select>
+
+    <select id="qmsR1CheckOneGet" resultType="com.ins.workPlan.dto.QMS_R1_CHECK_ONE_GET">
+        EXEC MB_QMS_R1_CHECK_ONE_GET  #{keyword}, #{keyword2}, #{keyword3}
+    </select>
+
+    <select id="qmsR1CheckAdd" resultType="com.ins.common.dto.Message">
+        EXEC SP_QMS_R1_CHECK_ADD #{keyword}, #{keyword2}
+    </select>
+
+    <select id="qmsR2CheckGet" resultType="com.ins.workPlan.dto.QMS_R2_CHECK_GET">
+        EXEC MB_QMS_R2_CHECK_GET  #{seq}, #{page}, #{keyword}, #{keyword2}, #{keyword3}, #{keyword4}
+    </select>
+
+    <select id="qmsR2CheckOneGet" resultType="com.ins.workPlan.dto.QMS_R2_CHECK_ONE_GET">
+        EXEC SP_QMS_R2_CHECK_ONE_GET  #{keyword}
+    </select>
+
+    <select id="qmsR2CheckAdd" resultType="com.ins.common.dto.Message">
+        EXEC SP_QMS_R2_CHECK_ADD #{keyword}, #{keyword2}
+    </select>
+
+    <select id="qmsR3CheckGet" resultType="com.ins.workPlan.dto.QMS_R3_CHECK_GET">
+        EXEC MB_QMS_R3_CHECK_GET
+    </select>
+
+    <select id="qmsR3CheckAdd" resultType="com.ins.common.dto.Message">
+        EXEC SP_QMS_R3_CHECK_ADD #{keyword}, #{keyword2}
+    </select>
+
+    <select id="qmsR3CheckOneGet" resultType="com.ins.workPlan.dto.QMS_R3_CHECK_ONE_GET">
+        EXEC SP_QMS_R3_CHECK_ONE_GET  #{keyword}
+    </select>
+
+    <select id="qmsR4CheckGet" resultType="com.ins.workPlan.dto.QMS_R4_CHECK_GET">
+        EXEC MB_QMS_R4_CHECK_GET  #{keyword}
+    </select>
+
+    <select id="qmsR4CheckAdd" resultType="com.ins.common.dto.Message">
+        EXEC MB_QMS_R4_CHECK_ADD #{keyword}, #{keyword2}
+    </select>
+</mapper>
